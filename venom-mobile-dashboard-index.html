@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071426">
+<title>VENOM BTCUSDm Dashboard</title>
+<style>
+:root{color-scheme:dark;--bg:#071426;--panel:#10243b;--line:#244568;--muted:#a9c0d8;--white:#f4f8ff;--green:#00c896;--red:#ff6878;--amber:#ffc66d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#122a46 0,#071426 44%);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--white);padding:16px 14px 32px}
+main{max-width:760px;margin:auto}.top{display:flex;align-items:center;gap:12px;margin:4px 0 18px}.logo{width:48px;height:48px;border-radius:14px;background:var(--green);color:#071426;display:grid;place-items:center;font-size:24px;font-weight:900}.title{font-weight:850;font-size:20px;letter-spacing:.4px}.sub{font-size:12px;color:var(--muted);margin-top:3px}.pill{margin-left:auto;border:1px solid #8d6d35;background:#3a2d17;color:var(--amber);border-radius:999px;padding:6px 9px;font-size:10px;font-weight:800;white-space:nowrap}
+.notice{border:1px solid #8d6d35;background:#2b2417;color:#ffe0a1;border-radius:12px;padding:11px 12px;font-size:12px;line-height:1.45;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:linear-gradient(145deg,#122942,#0c1d31);border:1px solid var(--line);border-radius:16px;padding:14px;min-width:0}.label{font-size:12px;color:var(--muted);margin-bottom:9px}.value{font-size:clamp(21px,6vw,29px);font-weight:800;letter-spacing:-.7px;overflow-wrap:anywhere}.small{font-size:12px;color:var(--muted);margin-top:6px}.section{font-size:13px;font-weight:800;letter-spacing:.7px;margin:19px 2px 9px;color:#d8e8f8}.rows{background:#0c1d31;border:1px solid var(--line);border-radius:15px;padding:4px 13px}.row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #1b3550;font-size:13px}.row:last-child{border:0}.row span:first-child{color:var(--muted)}.row strong{text-align:right;overflow-wrap:anywhere}.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}.foot{font-size:11px;color:#8ca5bf;text-align:center;line-height:1.5;margin-top:18px}.actions{display:flex;gap:8px;margin-top:14px}.btn{border:1px solid var(--line);background:#10243b;color:var(--white);border-radius:11px;padding:10px 12px;font-size:12px;font-weight:700;flex:1}.btn:active{transform:scale(.99)}@media(min-width:600px){body{padding:28px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.value{font-size:25px}}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div class="logo">V</div>
+    <div><div class="title">VENOM AI SCALPER</div><div class="sub">BTCUSDm · M1 · Mobile Trading Monitor</div></div>
+    <div class="pill">DEMO MODE</div>
+  </header>
+  <div class="notice"><strong>Prototype only — not connected to MT5.</strong> All figures below are sample values. This page does not execute trades or display your real account data yet.</div>
+  <div class="grid">
+    <div class="card"><div class="label">Account balance</div><div class="value" id="balance">$1,000.00</div><div class="small">Demo value</div></div>
+    <div class="card"><div class="label">Account equity</div><div class="value" id="equity">$999.20</div><div class="small">Demo value</div></div>
+    <div class="card"><div class="label">VENOM floating P/L</div><div class="value red" id="floating">-$0.80</div><div class="small">Open trades only</div></div>
+    <div class="card"><div class="label">Account drawdown</div><div class="value amber" id="dd">0.08%</div><div class="small">Balance vs equity</div></div>
+  </div>
+  <div class="section">LIVE BOT STATUS</div>
+  <div class="rows">
+    <div class="row"><span>Connection</span><strong class="amber">Not connected</strong></div>
+    <div class="row"><span>Open positions</span><strong id="positions">0 / 5</strong></div>
+    <div class="row"><span>M5 market direction</span><strong class="green" id="trend">BULLISH (sample)</strong></div>
+    <div class="row"><span>Latest signal</span><strong id="signal">Waiting for setup</strong></div>
+    <div class="row"><span>Basket recovery</span><strong class="green" id="basket">OFF</strong></div>
+    <div class="row"><span>Protective SL status</span><strong class="green">EA logic required</strong></div>
+    <div class="row"><span>CPI / USD news filter</span><strong class="amber" id="news">Demo status only</strong></div>
+    <div class="row"><span>Last dashboard refresh</span><strong id="refresh">—</strong></div>
+  </div>
+  <div class="section">RISK SETTINGS (CONFIGURED IN EA)</div>
+  <div class="rows">
+    <div class="row"><span>Risk per entry</span><strong>1.0% default</strong></div>
+    <div class="row"><span>Estimated total open risk cap</span><strong>3.0% default</strong></div>
+    <div class="row"><span>Maximum positions</span><strong>5 · No martingale</strong></div>
+    <div class="row"><span>Basket profit trigger</span><strong>$1.50 default</strong></div>
+    <div class="row"><span>Basket loss protection</span><strong>$3.00 default</strong></div>
+    <div class="row"><span>Recovered position exit</span><strong>$0.50 floating profit</strong></div>
+  </div>
+  <div class="actions"><button class="btn" id="refreshBtn">Refresh display</button><button class="btn" id="demoBtn">Toggle demo sample</button></div>
+  <div class="foot">VENOM dashboard prototype · Courtesy of Martin FX<br>For monitoring only. Connect an authenticated backend and a running Windows MT5 terminal before treating any value as live.</div>
+</main>
+<script>
+const samples=[
+ {balance:'$1,000.00',equity:'$999.20',floating:'-$0.80',dd:'0.08%',positions:'0 / 5',trend:'BULLISH (sample)',signal:'Waiting for setup',basket:'OFF',news:'Demo status only'},
+ {balance:'$1,000.00',equity:'$1,001.35',floating:'+$1.35',dd:'0.00%',positions:'2 / 5',trend:'BEARISH (sample)',signal:'SELL setup (sample)',basket:'Monitoring',news:'Demo status only'}
+];let sample=0;
+function render(){const s=samples[sample];for(const k of Object.keys(s)){const el=document.getElementById(k);if(el){el.textContent=s[k];el.className=(k==='floating'?(s.floating.startsWith('-')?'value red':'value green'):(k==='dd'?'value amber':(k==='trend'?'green':(k==='basket'?'green':(k==='news'?'amber':''))))}}document.getElementById('refresh').textContent=new Date().toLocaleString(); }
+document.getElementById('refreshBtn').addEventListener('click',render);
+document.getElementById('demoBtn').addEventListener('click',()=>{sample=1-sample;render()});
+render();
+</script>
+</body>
+</html>
